@@ -54,6 +54,16 @@ Then add to your `AppKernel.php`
   }
 ````
 
+And to your `services.yml`:
+
+````yaml
+    Stoakes\RoutingConverterBundle\Command\MigrateRoutesCommand:
+        tags:
+            - { name: 'console.command' }
+        arguments:
+          $resolver: '@debug.controller_resolver'
+````
+
 Use it : `php bin/console stoakes:convert_yml PATH_TO_A_ROUTING.YML_FILE [PREFIX]`
 
 `php bin/console stoakes:convert_yml ./src/AppBundle/Resources/config/routing.yml /fr
