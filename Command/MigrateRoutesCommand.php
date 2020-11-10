@@ -16,6 +16,12 @@ use Symfony\Component\Routing\Route;
 
 class MigrateRoutesCommand extends ContainerAwareCommand
 {
+    public function __construct($resolver) {
+        $this->resolver = $resolver;
+
+        parent::__construct();
+    }
+    
     /**
      * {@inheritdoc}
      * php bin/console stoakes:convert_yml ./src/Mgate/DashboardBundle/Resources/config/routing.yml /suivi
@@ -152,8 +158,7 @@ class MigrateRoutesCommand extends ContainerAwareCommand
     {
         $controller = $route->getDefault('_controller');
         $req = new Request([], [], array('_controller' => $controller));
-        $controllerResolver = $this->getContainer()->get('debug.controller_resolver');
-        $controller = $controllerResolver->getController($req);
+        $controller = $this->resolver->getController($req);
 
         return $controller;
     }
