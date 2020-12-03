@@ -78,3 +78,19 @@ That bundle provides a convertion command that uses symfony core components (rou
 You : " - Hey that bundle is untested !!"
 
 Me : " - I am working it. However I have created it in 2 evenings to convert routing in one of my app, and it works quite well"
+
+## Known bugs
+
+Be careful about this: `null` defaults will be converted to empty strings, example:
+
+    user_edit:
+      path: /user/edit/{id}
+      defaults: { _controller: 'UserController::editAction', 'id': null }
+
+becomes:
+  
+    /**
+     * @Route(name="user_edit", path="/user/edit/{id}", defaults={"id": ""})
+     */
+
+This may or may not impact you. Patches are welcome.
