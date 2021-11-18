@@ -165,9 +165,9 @@ class MigrateRoutesCommand extends ContainerAwareCommand
 
     private function importHandler(Editor $editor, Text $text)
     {
-        if (!$editor->hasBelow($text, 'use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;', 0)) {
+        if (!$editor->hasBelow($text, 'use Symfony\Component\Routing\Annotation\Route;', 0)) {
             $editor->jumpAbove($text, '#use S#'); //jump above first import. There are at least the controller import.
-            $editor->insertAbove($text, 'use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;');
+            $editor->insertAbove($text, 'use Symfony\Component\Routing\Annotation\Route;');
         }
 
         return $text;
